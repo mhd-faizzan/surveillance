@@ -1,0 +1,31 @@
+# environments
+.venv/
+.env
+
+# python cache
+__pycache__/
+*.pyc
+
+# data and models
+data/raw/
+data/frames/
+data/processed/
+models/*.pt
+models/*.pkl
+
+# jupyter
+.ipynb_checkpoints/
+
+# system
+.DS_Store
+
+# experiment tracking
+mlruns/
+
+# kaggle credentials 
+.kaggle/
+kaggle.json
+
+# secrets
+.env
+*.env

@@ -1,0 +1,54 @@
+project:
+  name: "surveillance"
+  random_seed: 42
+
+data:
+  raw_path: "data/raw/"
+  frames_path: "data/frames/"
+  keypoints_path: "data/processed/keypoints.csv"
+  train_path: "data/processed/train.csv"
+  test_path: "data/processed/test.csv"
+  test_size: 0.2
+  classes:
+    - Abuse
+    - Arrest
+    - Arson
+    - Assault
+    - Burglary
+    - Explosion
+    - Fighting
+    - Normal
+    - RoadAccident
+    - Robbery
+    - Shooting
+    - Shoplifting
+    - Stealing
+    - Vandalism
+
+features:
+  sequence_length: 16       
+  keypoint_count: 17
+  input_size: 34
+  confidence_threshold: 0.5
+  frame_skip: 3             
+
+model:
+  lstm:
+    hidden_size: 64          
+    num_layers: 1           
+    dropout: 0.3
+    learning_rate: 0.001
+    batch_size: 16           
+    epochs: 30              
+    save_path: "models/lstm_classifier.pt"
+  autoencoder:
+    hidden_size: 32          
+    learning_rate: 0.001
+    epochs: 20              
+    anomaly_threshold: 0.05
+    save_path: "models/autoencoder.pt"
+
+inference:
+  device: "mps"
+  confidence_alert_threshold: 0.85
+  temporal_smoothing_frames: 10
