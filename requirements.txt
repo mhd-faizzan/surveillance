@@ -1,0 +1,14 @@
+torch
+torchvision
+torchaudio
+ultralytics
+opencv-python
+mediapipe
+scikit-learn
+pandas
+numpy
+pyyaml
+kaggle
+streamlit
+fastapi
+uvicorn
