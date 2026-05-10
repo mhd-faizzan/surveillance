@@ -12,6 +12,8 @@ data/frames/
 data/processed/
 models/*.pt
 models/*.pkl
+*.pt
+*.pth
 
 # jupyter
 .ipynb_checkpoints/
