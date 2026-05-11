@@ -8,9 +8,13 @@ Real-time suspicious activity detection in surveillance videos using YOLOv8 pose
 
 ## Demo
 
+<div align="center">
+
 ![Dashboard Demo](assets/demo1.gif)
 
 ![Alert Detection](assets/demo2.gif)
+
+</div>
 
 ---
 
