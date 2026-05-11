@@ -52,19 +52,30 @@ def train_autoencoder(normal_sequences: torch.Tensor, config: dict) -> Autoencod
     )
     criterion = nn.MSELoss()
 
+    # use batches instead of full dataset at once
+    batch_size = 64
+    dataset = torch.utils.data.TensorDataset(normal_sequences)
+    loader = torch.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=True)
+
     normal_sequences = normal_sequences.to(device)
 
     for epoch in range(config["model"]["autoencoder"]["epochs"]):
         model.train()
-        optimizer.zero_grad()
-        reconstruction = model(normal_sequences)
-        loss = criterion(reconstruction, normal_sequences)
-        loss.backward()
-        optimizer.step()
+        total_loss = 0
+
+        for batch in loader:
+            x = batch[0].to(device)
+            optimizer.zero_grad()
+            reconstruction = model(x)
+            loss = criterion(reconstruction, x)
+            loss.backward()
+            optimizer.step()
+            total_loss += loss.item()
 
         if epoch % 5 == 0:
             logger.info("Autoencoder epoch %d/%d loss: %.6f",
-                epoch + 1, config["model"]["autoencoder"]["epochs"], loss.item())
+                epoch + 1, config["model"]["autoencoder"]["epochs"],
+                total_loss / len(loader))
 
     __import__('os').makedirs("models", exist_ok=True)
     __import__('torch').save(model.state_dict(), config["model"]["autoencoder"]["save_path"])
