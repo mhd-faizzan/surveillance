@@ -10,9 +10,9 @@ __pycache__/
 data/raw/
 data/frames/
 data/processed/
-models/*.pt
+# models/*.pt
 models/*.pkl
-*.pt
+# *.pt
 *.pth
 
 # jupyter
